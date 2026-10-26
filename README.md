@@ -14,7 +14,7 @@
 - Theme Studio zur Bearbeitung und Vorbereitung von Grafiken
 - Bildkonvertierung für die benötigten Theme-Dateien
 - Erstellung der für ein Y2JB-Theme benötigten Dateien
-- Automatische Suche nach dem richtigen Y2JB-Verzeichnis auf der PS5
+- Automatischer Scan von `/user/appmeta` nach den Y2JB-Ordnern `PPSA01650`, `PPSA01651` und `PPSA01652`
 - Automatischer FTP-Upload nach erfolgreicher Paketerstellung; vorhandene Dateien werden nur nach Bestätigung überschrieben
 - Windows-EXE zum direkten Starten
 
@@ -26,7 +26,7 @@ Für den automatischen FTP-Transfer muss auf der PS5 der **ftpsrv-Payload instal
 2. Starte `Y2JBThemeCreator.exe`.
 3. Installiere und starte `ftpsrv` auf der PS5 über den Payload Manager unter **Payload Verwaltung**.
 4. Verbinde PC und PS5 mit demselben vertrauenswürdigen lokalen Netzwerk und trage in der App die IP-Adresse der PS5 sowie den FTP-Port ein (Standard: `2121`).
-5. Wähle die Grafiken im Theme Studio aus und erstelle das Y2JB-Theme-Paket. Der Creator findet das Y2JB-Verzeichnis automatisch und beginnt den FTP-Upload automatisch. Bestätige die Abfrage, falls Dateien überschrieben werden sollen.
+5. Wähle die Grafiken im Theme Studio aus und erstelle das Y2JB-Theme-Paket. Der Creator durchsucht `/user/appmeta` automatisch nach den Y2JB-Ordnern `PPSA01650`, `PPSA01651` und `PPSA01652` und startet danach den FTP-Upload automatisch. Bestätige die Abfrage, falls Dateien überschrieben werden sollen.
 
 **Sicherheit:** FTP ist unverschlüsselt. Nutze den Upload nur in einem vertrauenswürdigen lokalen Netzwerk und veröffentliche den FTP-Dienst nicht im Internet. Änderungen an Zieldateien erfolgen auf eigene Verantwortung und nur auf Systemen, zu deren Änderung du berechtigt bist.
 
@@ -51,7 +51,7 @@ Dieses Projekt ist **inoffiziell** und weder mit Sony Interactive Entertainment 
 - Theme Studio for preparing and editing graphics
 - Image conversion for the required theme assets
 - Create theme files for Y2JB
-- Automatic detection of the correct Y2JB directory on the PS5
+- Automatic scan of `/user/appmeta` for Y2JB folders `PPSA01650`, `PPSA01651`, and `PPSA01652`
 - Automatic FTP upload after package creation; existing files are overwritten only after confirmation
 - Ready-to-run Windows executable
 
@@ -63,7 +63,7 @@ For automatic FTP transfer, the **ftpsrv payload must be installed and running o
 2. Launch `Y2JBThemeCreator.exe`.
 3. Install and start `ftpsrv` on the PS5 through Payload Manager under **Payload Verwaltung** (Payload Management).
 4. Connect the PC and PS5 to the same trusted local network, then enter the PS5 IP address and FTP port in the app (default: `2121`).
-5. Select your images in Theme Studio and create the Y2JB theme package. Theme Creator automatically finds the Y2JB directory and starts the FTP upload. Confirm if existing files need to be overwritten.
+5. Select your images in Theme Studio and create the Y2JB theme package. Theme Creator automatically scans `/user/appmeta` for Y2JB folders `PPSA01650`, `PPSA01651`, and `PPSA01652`, then starts the FTP upload. Confirm if existing files need to be overwritten.
 
 **Security:** FTP is unencrypted. Use uploads only on a trusted local network; do not expose the FTP service to the internet. Only modify systems and files you are authorized to manage.
 
