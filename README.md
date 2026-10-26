@@ -19,7 +19,7 @@ Für den automatischen FTP-Transfer muss auf der PS5 der **ftpsrv-Payload instal
 
 ### Installation und Verwendung
 1. Lade das Windows-Paket aus den **Releases** herunter und entpacke es in einen beschreibbaren Ordner.
-2. Starte `Y2JB_Theme_Creator_MrGee.exe`.
+2. Starte `Y2JBThemeCreator.exe`.
 3. Installiere und starte `ftpsrv` auf der PS5 über den Payload Manager unter **Payload Verwaltung**.
 4. Verbinde PC und PS5 mit demselben vertrauenswürdigen lokalen Netzwerk und trage in der App die IP-Adresse der PS5 sowie den FTP-Port ein (Standard: `2121`).
 5. Wähle die Grafiken im Theme Studio aus und erstelle das PS5-Paket. Der Creator findet das Y2JB-Verzeichnis automatisch und beginnt den FTP-Upload automatisch. Bestätige die Abfrage, falls Dateien überschrieben werden sollen.
@@ -52,7 +52,7 @@ For automatic FTP transfer, the **ftpsrv payload must be installed and running o
 
 ### Installation and usage
 1. Download the Windows package from **Releases** and extract it into a writable folder.
-2. Launch `Y2JB_Theme_Creator_MrGee.exe`.
+2. Launch `Y2JBThemeCreator.exe`.
 3. Install and start `ftpsrv` on the PS5 through Payload Manager under **Payload Verwaltung** (Payload Management).
 4. Connect the PC and PS5 to the same trusted local network, then enter the PS5 IP address and FTP port in the app (default: `2121`).
 5. Select your images in Theme Studio and create the PS5 package. Theme Creator automatically finds the Y2JB directory and starts the FTP upload. Confirm if existing files need to be overwritten.
