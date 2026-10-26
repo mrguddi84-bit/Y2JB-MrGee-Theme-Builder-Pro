@@ -27,11 +27,11 @@ Für den automatischen FTP-Transfer muss auf der PS5 der **ftpsrv-Payload instal
 **Sicherheit:** FTP ist unverschlüsselt. Nutze den Upload nur in einem vertrauenswürdigen lokalen Netzwerk und veröffentliche den FTP-Dienst nicht im Internet. Änderungen an Zieldateien erfolgen auf eigene Verantwortung und nur auf Systemen, zu deren Änderung du berechtigt bist.
 
 ### Rechte und Hinweise
-© 2026 MrGee. Alle Rechte vorbehalten. Der eigene Anwendungscode und die originalen Y2JB-Grafiken sind **proprietär**. Die öffentliche Bereitstellung des Quellcodes ist keine Open-Source-Lizenz. Details in [LICENSE](LICENSE). Drittanbieterkomponenten haben eigene Lizenzen; siehe [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md), [CREDITS.md](CREDITS.md) und [DEPENDENCY_AUDIT.md](DEPENDENCY_AUDIT.md).
+© 2026 MrGee. Alle Rechte vorbehalten. Der eigene Anwendungscode und die originalen Y2JB-Grafiken sind **proprietär**. Die öffentliche Bereitstellung des Quellcodes ist keine Open-Source-Lizenz. Details in [LICENSE](LICENSE). Drittanbieterkomponenten haben eigene Lizenzen und Herkunftshinweise; siehe [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) und [CREDITS.md](CREDITS.md).
 
 Dieses Projekt ist **inoffiziell** und weder mit Sony Interactive Entertainment verbunden noch von Sony unterstützt. Das Y2JB-Logo stammt vom Projektinhaber; die mitgelieferten Beispielgrafiken wurden nach dessen Angaben mit ChatGPT erzeugt. Marken Dritter gehören ihren jeweiligen Inhabern.
 
-**Build-Hinweis:** Die vorhandene Windows-EXE wurde für die GitHub-Vorbereitung nicht verändert oder neu gebaut. Ihre gespeicherte Standard-IP kann von der des veröffentlichten Python-Codes abweichen. Eine vollständig reproduzierbare Build-Konfiguration ist nicht enthalten. Offene Nachweise zu Drittanbieter-Binärdateien sind in [PROVENANCE_STATUS.md](PROVENANCE_STATUS.md) dokumentiert.
+**Build-Hinweis:** Die vorhandene Windows-EXE wurde für die GitHub-Veröffentlichung nicht verändert oder neu gebaut. Ihre gespeicherte Standard-IP kann von der des veröffentlichten Python-Codes abweichen; eine vollständig reproduzierbare Build-Konfiguration ist nicht enthalten.
 
 ---
 
@@ -60,8 +60,8 @@ For automatic FTP transfer, the **ftpsrv payload must be installed and running o
 **Security:** FTP is unencrypted. Use uploads only on a trusted local network; do not expose the FTP service to the internet. Only modify systems and files you are authorized to manage.
 
 ### Rights and notices
-© 2026 MrGee. All rights reserved. The original application source and Y2JB artwork are **proprietary**. Public source availability does not grant an open-source license. See [LICENSE](LICENSE). Third-party components retain their own licenses; see [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md), [CREDITS.md](CREDITS.md), and [DEPENDENCY_AUDIT.md](DEPENDENCY_AUDIT.md).
+© 2026 MrGee. All rights reserved. The original application source and Y2JB artwork are **proprietary**. Public source availability does not grant an open-source license. See [LICENSE](LICENSE). Third-party components retain their own licenses and attribution; see [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) and [CREDITS.md](CREDITS.md).
 
 This is an **unofficial** project and is not affiliated with or endorsed by Sony Interactive Entertainment. The Y2JB logo belongs to the project owner; the included sample images were reportedly generated using ChatGPT. Third-party trademarks remain the property of their respective owners.
 
-**Build note:** The existing Windows executable was not modified or rebuilt for GitHub publication. Its saved default IP may differ from the published Python source. A fully reproducible build configuration is not provided. Outstanding binary provenance checks are documented in [PROVENANCE_STATUS.md](PROVENANCE_STATUS.md).
+**Build note:** The existing Windows executable was not modified or rebuilt for GitHub publication. Its saved default IP may differ from the published Python source; a fully reproducible build configuration is not provided.
