@@ -14,6 +14,18 @@
 - Automatischer FTP-Upload nach erfolgreicher Paketerstellung; vorhandene Dateien werden nur nach Bestätigung überschrieben
 - Windows-EXE zum direkten Starten
 
+### PNG-Dateien und Ablage in `EINGABE`
+Lege die folgenden PNG-Dateien im Ordner `EINGABE` der App ab:
+
+| Bild | Größe | Dateiname | Anzahl |
+|---|---:|---|---:|
+| Icon | 512 × 512 px | `icon0.png` | 1 |
+| Background | 3840 × 2160 px | `pic0.png`, `pic1.png`, `pic2.png` | 3 |
+
+Das Background-Bild muss also unter allen drei Dateinamen in `EINGABE` vorhanden sein. Wenn du dasselbe Motiv für alle drei Hintergründe möchtest, kannst du die Datei dreimal kopieren und entsprechend benennen.
+
+
+
 ### Voraussetzung: ftpsrv-Payload auf der PS5
 Für den automatischen FTP-Transfer muss auf der PS5 der **ftpsrv-Payload installiert und gestartet** sein. Installiere bzw. verwalte ihn im **Payload Manager** unter **Payload Verwaltung**. Der Payload stellt den FTP-Server auf der PS5 bereit; der Standardport ist **2121**. Er setzt eine kompatible Payload-Umgebung auf der PS5 voraus. Weitere Informationen: [ps5-payload-dev/ftpsrv](https://github.com/ps5-payload-dev/ftpsrv).
 
@@ -46,6 +58,16 @@ Dieses Projekt ist **inoffiziell** und weder mit Sony Interactive Entertainment 
 - Automatic scan of `/user/appmeta` for Y2JB folders `PPSA01650`, `PPSA01651`, and `PPSA01652`
 - Automatic FTP upload after package creation; existing files are overwritten only after confirmation
 - Ready-to-run Windows executable
+
+### PNG files and the `EINGABE` folder
+Place these PNG files in the app's `EINGABE` folder:
+
+| Image | Dimensions | Filename | Count |
+|---|---:|---|---:|
+| Icon | 512 × 512 px | `icon0.png` | 1 |
+| Background | 3840 × 2160 px | `pic0.png`, `pic1.png`, `pic2.png` | 3 |
+
+The background image must therefore be present in `EINGABE` under all three filenames. If you want the same artwork for all three backgrounds, copy the image three times and name each copy accordingly.
 
 ### Requirement: ftpsrv payload on the PS5
 For automatic FTP transfer, the **ftpsrv payload must be installed and running on the PS5**. Install or manage it in **Payload Manager** under **Payload Verwaltung** (Payload Management). The payload provides the FTP server on the PS5 and uses port **2121** by default. A compatible payload environment is required. See [ps5-payload-dev/ftpsrv](https://github.com/ps5-payload-dev/ftpsrv) for details.
