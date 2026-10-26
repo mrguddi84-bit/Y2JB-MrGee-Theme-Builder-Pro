@@ -1,15 +1,15 @@
-# Y2JB MrGee Theme Builder Pro
+# Y2JB Theme Creator Pro by MrGee
 
 **Deutsch** | [English](#english)
 
 ## Deutsch
 
-**Y2JB MrGee Theme Builder Pro** ist eine Windows-Anwendung zum Erstellen von PS5-Theme-Paketen. Der Theme Creator sucht automatisch nach dem passenden Y2JB-Verzeichnis auf der PS5 und lädt das fertige Paket anschließend automatisch per FTP hoch.
+**Y2JB Theme Creator Pro** ist eine Windows-Anwendung zum Erstellen und Übertragen von Theme-Dateien für **Y2JB auf der PS5**. Die App erstellt die von Y2JB benötigten Bilddateien, sucht automatisch das passende Y2JB-Verzeichnis auf der PS5 und lädt die Dateien anschließend automatisch per FTP hoch.
 
 ### Funktionen
 - Theme Studio zur Bearbeitung und Vorbereitung von Grafiken
 - Bildkonvertierung für die benötigten Theme-Dateien
-- Erstellung eines PS5-Theme-Pakets
+- Erstellung der für ein Y2JB-Theme benötigten Dateien
 - Automatische Suche nach dem richtigen Y2JB-Verzeichnis auf der PS5
 - Automatischer FTP-Upload nach erfolgreicher Paketerstellung; vorhandene Dateien werden nur nach Bestätigung überschrieben
 - Windows-EXE zum direkten Starten
@@ -22,7 +22,7 @@ Für den automatischen FTP-Transfer muss auf der PS5 der **ftpsrv-Payload instal
 2. Starte `Y2JBThemeCreator.exe`.
 3. Installiere und starte `ftpsrv` auf der PS5 über den Payload Manager unter **Payload Verwaltung**.
 4. Verbinde PC und PS5 mit demselben vertrauenswürdigen lokalen Netzwerk und trage in der App die IP-Adresse der PS5 sowie den FTP-Port ein (Standard: `2121`).
-5. Wähle die Grafiken im Theme Studio aus und erstelle das PS5-Paket. Der Creator findet das Y2JB-Verzeichnis automatisch und beginnt den FTP-Upload automatisch. Bestätige die Abfrage, falls Dateien überschrieben werden sollen.
+5. Wähle die Grafiken im Theme Studio aus und erstelle das Y2JB-Theme-Paket. Der Creator findet das Y2JB-Verzeichnis automatisch und beginnt den FTP-Upload automatisch. Bestätige die Abfrage, falls Dateien überschrieben werden sollen.
 
 **Sicherheit:** FTP ist unverschlüsselt. Nutze den Upload nur in einem vertrauenswürdigen lokalen Netzwerk und veröffentliche den FTP-Dienst nicht im Internet. Änderungen an Zieldateien erfolgen auf eigene Verantwortung und nur auf Systemen, zu deren Änderung du berechtigt bist.
 
@@ -37,12 +37,12 @@ Dieses Projekt ist **inoffiziell** und weder mit Sony Interactive Entertainment 
 
 ## English
 
-**Y2JB MrGee Theme Builder Pro** is a Windows application for creating PS5 theme packages. Theme Creator automatically scans the PS5 for the correct Y2JB directory and automatically uploads the finished package over FTP.
+**Y2JB Theme Creator Pro** is a Windows app for preparing and transferring theme files for **Y2JB on PS5**. It creates the image files used by Y2JB, automatically finds the correct Y2JB directory on the PS5, and uploads the files over FTP.
 
 ### Features
 - Theme Studio for preparing and editing graphics
 - Image conversion for the required theme assets
-- PS5 theme package creation
+- Create theme files for Y2JB
 - Automatic detection of the correct Y2JB directory on the PS5
 - Automatic FTP upload after package creation; existing files are overwritten only after confirmation
 - Ready-to-run Windows executable
@@ -55,7 +55,7 @@ For automatic FTP transfer, the **ftpsrv payload must be installed and running o
 2. Launch `Y2JBThemeCreator.exe`.
 3. Install and start `ftpsrv` on the PS5 through Payload Manager under **Payload Verwaltung** (Payload Management).
 4. Connect the PC and PS5 to the same trusted local network, then enter the PS5 IP address and FTP port in the app (default: `2121`).
-5. Select your images in Theme Studio and create the PS5 package. Theme Creator automatically finds the Y2JB directory and starts the FTP upload. Confirm if existing files need to be overwritten.
+5. Select your images in Theme Studio and create the Y2JB theme package. Theme Creator automatically finds the Y2JB directory and starts the FTP upload. Confirm if existing files need to be overwritten.
 
 **Security:** FTP is unencrypted. Use uploads only on a trusted local network; do not expose the FTP service to the internet. Only modify systems and files you are authorized to manage.
 
