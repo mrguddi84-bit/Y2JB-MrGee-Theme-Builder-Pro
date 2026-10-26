@@ -6,10 +6,6 @@
 
 **Y2JB Theme Creator Pro** ist eine Windows-Anwendung zum Erstellen und Übertragen von Theme-Dateien für **Y2JB auf der PS5**. Die App erstellt die von Y2JB benötigten Bilddateien, sucht automatisch das passende Y2JB-Verzeichnis auf der PS5 und lädt die Dateien anschließend automatisch per FTP hoch.
 
-### Dashboard-Screenshot
-
-![Dashboard des Y2JB Theme Creator Pro (Deutsch)](assets/dashboard-de.png)
-
 ### Funktionen
 - Theme Studio zur Bearbeitung und Vorbereitung von Grafiken
 - Bildkonvertierung für die benötigten Theme-Dateien
@@ -42,10 +38,6 @@ Dieses Projekt ist **inoffiziell** und weder mit Sony Interactive Entertainment 
 ## English
 
 **Y2JB Theme Creator Pro** is a Windows app for preparing and transferring theme files for **Y2JB on PS5**. It creates the image files used by Y2JB, automatically finds the correct Y2JB directory on the PS5, and uploads the files over FTP.
-
-### Dashboard Screenshot
-
-![Y2JB Theme Creator Pro dashboard (English)](assets/dashboard-en.png)
 
 ### Features
 - Theme Studio for preparing and editing graphics
