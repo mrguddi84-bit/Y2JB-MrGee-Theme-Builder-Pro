@@ -1,8 +1,9 @@
 """FTP client for the user-started ftpsrv payload on port 2121."""
 from contextlib import contextmanager
-from ftplib import FTP, error_perm
+from ftplib import FTP, error_perm, error_reply
 from pathlib import Path
 import ipaddress
+import hashlib
 import posixpath
 
 
@@ -169,6 +170,69 @@ class FTPClient:
                 raise FTPError(f'Upload-Prüfung fehlgeschlagen: {stored["size"]} statt {src.stat().st_size} Bytes')
         return remote
 
+    def remote_sha256(self, remote, progress=None):
+        """Read back the remote file and calculate its SHA-256 digest."""
+        remote = self.clean_path(remote)
+        digest = hashlib.sha256()
+        received = 0
+        total = self.remote_size(remote) if progress else None
+        def consume(block):
+            nonlocal received
+            digest.update(block)
+            received += len(block)
+            if progress:
+                progress(received,total)
+        try:
+            with self.connect() as ftp:
+                ftp.retrbinary('RETR ' + remote, consume, blocksize=128 * 1024)
+        except Exception as exc:
+            raise FTPError(f'SHA-256-Rücklesen fehlgeschlagen ({remote}): {exc}') from exc
+        return digest.hexdigest()
+
+    def file_permissions(self, remote):
+        """Read Unix permission bits from LIST when the server exposes them."""
+        remote = self.clean_path(remote)
+        directory, filename = posixpath.split(remote)
+        with self.connect() as ftp:
+            ftp.cwd(directory or '/')
+            lines = []
+            ftp.retrlines('LIST', lines.append)
+        for line in lines:
+            parts = line.split(maxsplit=8)
+            if len(parts) < 9 or parts[8] != filename:
+                continue
+            perms = parts[0]
+            if len(perms) < 10 or perms[0] not in '-l':
+                return None
+            bits = []
+            for triad in (perms[1:4], perms[4:7], perms[7:10]):
+                bits.append(str((4 if triad[0] == 'r' else 0) + (2 if triad[1] == 'w' else 0) + (1 if triad[2] in 'xs' else 0)))
+            return ''.join(bits)
+        return None
+
+    def chmod(self, remote, mode):
+        """Set permissions, require FTP success, and verify LIST when available."""
+        remote = self.clean_path(remote)
+        if mode not in ('444', '644'):
+            raise FTPError('Ungültiger Dateimodus')
+        with self.connect() as ftp:
+            response = ftp.sendcmd(f'SITE CHMOD {mode} {remote}')
+        if not response.startswith('2'):
+            raise FTPError(f'CHMOD {mode} fehlgeschlagen: {response}')
+        try:
+            observed = self.file_permissions(remote)
+        except Exception as exc:
+            return f'CHMOD {mode}: Server bestätigt ({response}); Berechtigungen nicht auslesbar ({exc})'
+        if observed is not None and observed != mode:
+            raise FTPError(f'CHMOD {mode} nicht wirksam: FTP LIST meldet {observed} für {remote}')
+        if observed is None:
+            return f'CHMOD {mode}: Server bestätigt; LIST erlaubt keine unabhängige Kontrolle'
+        return f'CHMOD {mode} bestätigt und geprüft (LIST: {observed})'
+
+    def try_chmod(self, remote, mode):
+        """Backward-compatible wrapper; no longer silently ignores errors."""
+        return self.chmod(remote, mode)
+
     def _list_connected(self, ftp):
         records = []
         try:
@@ -209,7 +273,15 @@ class FTPClient:
             raise FTPError('Ordner können mit dieser Funktion nicht gelöscht werden.')
         with self.connect() as ftp:
             ftp.cwd(directory or '/')
-            ftp.delete(name)
+            # ftpsrv can return 226 "File deleted". ftplib.FTP.delete()
+            # accepts only 250, even though 226 is a successful 2xx reply.
+            response = ftp.sendcmd('DELE ' + name)
+            if not response.startswith('2'):
+                raise FTPError(f'Löschen fehlgeschlagen ({remote}): {response}')
+        # Do not proceed to STOR until the old file is actually gone.
+        remaining = self.list(directory or '/')
+        if any(item['name'] == name for item in remaining):
+            raise FTPError(f'FTP meldet Löschen erfolgreich ({response}), aber Datei existiert weiterhin: {remote}')
         return remote
 
     def download(self, remote, local, expected_size=None, progress=None):
@@ -235,8 +307,8 @@ class FTPClient:
                     ftp.retrbinary('RETR ' + remote, write, blocksize=128 * 1024)
             if actual_size is not None and dst.stat().st_size != actual_size:
                 raise FTPError(f'Download-Prüfung fehlgeschlagen: {dst.stat().st_size} statt {actual_size} Bytes')
-        except Exception:
+        except Exception as exc:
             if created:
                 dst.unlink(missing_ok=True)
-            raise
+            raise FTPError(f'Backup-Download fehlgeschlagen ({remote}): {exc}') from exc
         return str(dst)
