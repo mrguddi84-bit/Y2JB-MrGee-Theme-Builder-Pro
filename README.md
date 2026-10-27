@@ -103,3 +103,30 @@ For automatic FTP transfer, the **ftpsrv payload must be installed and running o
 This is an **unofficial** project and is not affiliated with or endorsed by Sony Interactive Entertainment. The Y2JB logo belongs to the project owner; the included sample images were reportedly generated using ChatGPT. Third-party trademarks remain the property of their respective owners.
 
 **Build note:** The existing Windows executable was not modified or rebuilt for GitHub publication. Its saved default IP may differ from the published Python source; a fully reproducible build configuration is not provided.
+
+
+---
+
+## Beispiel-Theme (Deutsch)
+
+**Bild 1 ist das Icon, Bild 2 der Hintergrund.** Für die Dateien im Ordner `EINGABE` gelten weiterhin die oben genannten PNG-Größen.
+
+**Icon (Bild 1):**
+
+![Beispiel-Theme – Icon, Bild 1](assets/file_000000008d0082118dce526bd96d0303.png)
+
+**Hintergrund (Bild 2):**
+
+![Beispiel-Theme – Hintergrund, Bild 2](assets/file_00000000f9748210917ae68e43114c88.png)
+
+## Example theme (English)
+
+**Image 1 is the icon; image 2 is the background.** The PNG dimensions listed above still apply to files in the app's `EINGABE` folder.
+
+**Icon (image 1):**
+
+![Example theme – icon, image 1](assets/file_000000008d0082118dce526bd96d0303.png)
+
+**Background (image 2):**
+
+![Example theme – background, image 2](assets/file_00000000f9748210917ae68e43114c88.png)
