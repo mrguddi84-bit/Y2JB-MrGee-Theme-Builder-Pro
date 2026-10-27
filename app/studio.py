@@ -1,10 +1,11 @@
-"""Y2JB Theme Creator ©MrGee — version 1.0."""
-import os, sys, queue, shutil, struct, subprocess, tempfile, threading, locale
+"""Y2JB Theme Creator ©MrGee — version 1.0.1."""
+import os, sys, queue, shutil, struct, subprocess, tempfile, threading, locale, hashlib
 from pathlib import Path
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 from PIL import Image, ImageOps, ImageTk, ImageDraw
 from ftp_client import FTPClient, FTPError
+from connection_settings import load_connection, save_connection
 Y2JB_IDS = ("PPSA01650", "PPSA01651", "PPSA01652")
 try:
     from tkinterdnd2 import TkinterDnD, DND_FILES
@@ -65,16 +66,17 @@ def build_package(source,dest,texconv,mode,progress):
             if not dds.exists(): raise RuntimeError(f'{dds.name} fehlt.')
             verify_dds(dds,dims)
             progress(index,len(selected)*2,f'{dds.name} BC7 ✓')
-        (stage/'UPLOAD_HINWEISE.txt').write_text('Y2JB Theme Creator ©MrGee · Version 1.0\n\nNur erzeugte PNG/DDS-Dateien verwenden.\nVorhandene Dateien vor dem Ersetzen lokal sichern.\nPS5-Zielordner wird von der App unter /user/appmeta/ erkannt.\n',encoding='utf-8')
+        (stage/'UPLOAD_HINWEISE.txt').write_text('Y2JB Theme Creator ©MrGee · Version 1.0.1\n\nNur erzeugte PNG/DDS-Dateien verwenden.\nVorhandene Dateien vor dem Ersetzen lokal sichern.\nPS5-Zielordner wird von der App unter /user/appmeta/ erkannt.\n',encoding='utf-8')
         for file in stage.iterdir(): shutil.copy2(file,dest/file.name)
     return dest
 
 class Studio:
     def __init__(self,root):
-        self.root=root;self.root.title('Y2JB Theme Creator ©MrGee | 1.0');self.root.geometry('1500x930');self.root.minsize(1120,730);self.root.configure(bg=COL['bg'])
+        self.root=root;self.root.title('Y2JB Theme Creator ©MrGee | 1.0.1');self.root.geometry('1500x930');self.root.minsize(1120,730);self.root.configure(bg=COL['bg'])
         self.indir=ROOT/'EINGABE';self.outdir=ROOT/'PS5_UPLOAD';self.tex=ROOT/'tools'/'texconv.exe'
         self.indir.mkdir(exist_ok=True);self.outdir.mkdir(exist_ok=True)
-        self.ps5ip=tk.StringVar(value='');self.connection_status=tk.StringVar(value='Nicht geprüft');self.ppsa_status=tk.StringVar(value='Nicht geprüft');self.target_status=tk.StringVar(value='Nicht geprüft');self.discovered_ppsa=[];self.selected_ppsa=None;self.mode=tk.StringVar(value='crop');self.progress_value=tk.DoubleVar(value=0);self.status=tk.StringVar(value='');self.running=False;self.events=queue.Queue();self.images={};self.tiles={};self.fm_info=tk.StringVar(value='Noch kein Upload gestartet.');self.fm_busy=False;self.fm_progress=tk.DoubleVar(value=0);self.ftp_port=tk.StringVar(value="2121");self._active_ftp_client=None;self.last_generated_files=[];self.activity_files=tk.StringVar(value='Hier erscheinen die in diesem Durchlauf erstellten Dateien.');self.pending_upload_after_discovery=False
+        saved_connection=load_connection()
+        self.ps5ip=tk.StringVar(value=saved_connection.get('host',''));self.connection_status=tk.StringVar(value='Nicht geprüft');self.ppsa_status=tk.StringVar(value='Nicht geprüft');self.target_status=tk.StringVar(value='Nicht geprüft');self.discovered_ppsa=[];self.selected_ppsa=None;self.mode=tk.StringVar(value='crop');self.progress_value=tk.DoubleVar(value=0);self.status=tk.StringVar(value='');self.running=False;self.events=queue.Queue();self.images={};self.tiles={};self.fm_info=tk.StringVar(value='Noch kein Upload gestartet.');self.fm_busy=False;self.fm_progress=tk.DoubleVar(value=0);self.ftp_port=tk.StringVar(value=str(saved_connection.get("port",2121)));self._active_ftp_client=None;self.last_generated_files=[];self.activity_files=tk.StringVar(value='Hier erscheinen die in diesem Durchlauf erstellten Dateien.');self.pending_upload_after_discovery=False;self.icon_protect=tk.BooleanVar(value=True);self.icon_file_status=tk.StringVar(value='Noch nicht gescannt');self.icon_permission_status=tk.StringVar(value='Noch nicht geprüft');self.upload_diagnostic=tk.StringVar(value='Kein Fehler · bereit')
         system=(locale.getlocale()[0] or 'en').split('_')[0].lower();system=system if system in WORDS else 'en'
         self.lang=tk.StringVar(value=next((name for name,code in LANGS.items() if code==system),'English'))
         self.build();self.refresh();self.root.after(90,self.poll);self.root.after(20000,self.connection_heartbeat)
@@ -99,7 +101,7 @@ class Studio:
             self.sidebar_art.pack(fill='both',expand=True)
             self.sidebar_art.bind('<Configure>',self.resize_sidebar_art)
         self.label(sidebar,'CREATE YOUR OWN Y2JB THEMES',9,'#A8C9E8',True,wraplength=210,justify='left').pack(anchor='w',padx=18,pady=(5,3))
-        self.label(sidebar,'©MrGee  ·  VERSION 1.0',9,'#70BBFF',True).pack(anchor='w',padx=18,pady=(3,18))
+        self.label(sidebar,'©MrGee  ·  VERSION 1.0.1',9,'#70BBFF',True).pack(anchor='w',padx=18,pady=(3,18))
 
         body=tk.Frame(shell,bg=COL['bg']);body.grid(row=0,column=1,sticky='nsew');body.grid_rowconfigure(1,weight=1);body.grid_columnconfigure(0,weight=1)
         top=tk.Frame(body,bg='#06152B',height=80,highlightbackground='#173B62',highlightthickness=1);top.grid(row=0,column=0,sticky='ew');top.grid_propagate(False)
@@ -111,7 +113,7 @@ class Studio:
         for key,title in [('dashboard','Dashboard'),('studio','Theme Studio')]:
             btn=tk.Button(nav,text=title,command=lambda k=key:self.show_view(k),relief='flat',bd=0,cursor='hand2',bg='#06152B',fg='#AFC8E2',activebackground='#0C3158',activeforeground='white',font=('Segoe UI',10,'bold'),padx=16,pady=8)
             btn.pack(side='left',fill='y',padx=3,pady=13);self.nav_buttons[key]=btn
-        self.label(top,'VERSION 1.0',9,'#A5C9EB',True,bg='#06152B').pack(side='right',padx=20)
+        self.label(top,'VERSION 1.0.1',9,'#A5C9EB',True,bg='#06152B').pack(side='right',padx=20)
 
         self.view_host=tk.Frame(body,bg=COL['bg']);self.view_host.grid(row=1,column=0,sticky='nsew')
         self.views={}
@@ -162,7 +164,7 @@ class Studio:
         fmt=tk.Frame(settings,bg=COL['panel'],highlightbackground=COL['border'],highlightthickness=1);fmt.pack(side='left',padx=(0,8))
         self.label(fmt,self.t('format'),9,'#98C8F9',True).pack(anchor='w',padx=12,pady=(8,0))
         self.label(fmt,'BC7_UNORM  /  DDS DX10',10,'white').pack(padx=12,pady=(5,15))
-        self.go=self.button(settings,'🎮  '+self.t('create'),self.start,True,12);self.go.pack(side='right',fill='y')
+        self.go=self.button(settings,self.ui('THEME PAKET HOCHLADEN','UPLOAD THEME PACKAGE'),self.start,True,12);self.go.pack(side='right',fill='y')
         bottom=tk.Frame(main,bg=COL['panel'],highlightbackground=COL['border'],highlightthickness=1);bottom.pack(fill='x')
         row=tk.Frame(bottom,bg=COL['panel']);row.pack(fill='x',padx=12,pady=(9,5))
         self.label(row,self.t('status'),10,'#D6EAFF',True).pack(side='left')
@@ -175,7 +177,7 @@ class Studio:
         footer=tk.Frame(main,bg=COL['bg']);footer.pack(fill='x',pady=(8,0))
         self.button(footer,self.t('input'),lambda:self.open_dir(self.indir),size=9).pack(side='left')
         self.button(footer,self.t('output'),lambda:self.open_dir(self.outdir),size=9).pack(side='left',padx=7)
-        self.theme_upload_button=self.button(footer,self.ui('DIREKT AUF PS5 HOCHLADEN','UPLOAD DIRECTLY TO PS5'),self.theme_upload,True,size=10)
+        self.theme_upload_button=self.button(footer,self.ui('THEME PAKET HOCHLADEN','UPLOAD THEME PACKAGE'),self.theme_upload,True,size=10)
         self.theme_upload_button.pack(side='right')
         self.theme_upload_button.config(state='disabled')
         self.show_view(getattr(self,'current_view','dashboard'))
@@ -208,6 +210,15 @@ class Studio:
         self.label(action,self.ui('ftpsrv selbst auf der PS5 starten','Start ftpsrv yourself on the PS5'),9,'#91B1CE',bg='#0A203B').pack(side='left',padx=16)
         self.button(action,self.ui('VERBINDEN  →','CONNECT  →'),self.fm_discover,True,10).pack(side='right',padx=16,pady=14)
 
+        controls=tk.Frame(parent,bg=COL['bg']);controls.pack(fill='x',pady=(0,12))
+        self.button(controls,self.ui('THEME PAKET HOCHLADEN','UPLOAD THEME PACKAGE'),self.dashboard_package_upload,True,size=10).pack(side='left',padx=(0,9))
+        self.icon_refresh_button=self.button(controls,'ICON SCANNEN',self.icon_scan,size=9)
+        self.icon_refresh_button.pack(side='left',padx=(0,7))
+        self.icon_unlock_button=self.button(controls,'ICON FREIGEBEN (644)',lambda:self.icon_change_permissions('644'),size=9)
+        self.icon_unlock_button.pack(side='left',padx=(0,7))
+        self.icon_lock_button=self.button(controls,'ICON SPERREN (444)',lambda:self.icon_change_permissions('444'),size=9)
+        self.icon_lock_button.pack(side='left')
+        tk.Checkbutton(controls,text='Icon-Schutz nach Upload',variable=self.icon_protect,bg=COL['bg'],fg='#B8D6F2',selectcolor='#102D4D',activebackground=COL['bg'],activeforeground='white').pack(side='right')
         section=tk.Frame(parent,bg=COL['bg']);section.pack(fill='x',pady=(0,10))
         self.label(section,self.ui('VERBINDUNGSSTATUS','CONNECTION STATUS'),9,'#8CB7DF',True).pack(side='left')
         self.label(section,'FTP 2121',9,'#5B83AA',True).pack(side='right')
@@ -235,6 +246,11 @@ class Studio:
             self.status_trace_ids.append((variable,trace_id))
             self.update_status_dot(variable,dot)
 
+        iconstatus=tk.Frame(board,bg='#091B32');iconstatus.grid(row=1,column=0,columnspan=3,sticky='ew',padx=20,pady=(0,12))
+        self.label(iconstatus,'ICON-DATEIEN  ·  ',9,'#92BDE4',True,bg='#091B32').pack(side='left')
+        tk.Label(iconstatus,textvariable=self.icon_file_status,bg='#091B32',fg='#D9ECFF',font=('Segoe UI',9)).pack(side='left',padx=(0,15))
+        tk.Label(iconstatus,textvariable=self.icon_permission_status,bg='#091B32',fg='#D9ECFF',font=('Segoe UI',9)).pack(side='left')
+
         activity=tk.Frame(parent,bg='#081A30',highlightbackground='#1A4268',highlightthickness=1)
         activity.pack(fill='both',expand=True,pady=(16,0))
         title=tk.Frame(activity,bg='#081A30');title.pack(fill='x',padx=18,pady=(14,8))
@@ -250,6 +266,10 @@ class Studio:
         tk.Label(uploadrow,textvariable=self.fm_info,bg='#081A30',fg='#B8D6F2',anchor='w',justify='left',wraplength=950,font=('Segoe UI',10)).pack(fill='x')
         self.dashboard_upload_bar=ttk.Progressbar(uploadrow,variable=self.fm_progress,maximum=100,style='MrGee.Horizontal.TProgressbar')
         self.dashboard_upload_bar.pack(fill='x',pady=(5,0))
+        self.icon_buttons_state(False)
+        diagnostic=tk.Frame(activity,bg='#081A30');diagnostic.pack(fill='x',padx=18,pady=(2,6))
+        self.label(diagnostic,'UPLOAD-DIAGNOSE',9,'#92BDE4',True,bg='#081A30').pack(anchor='w')
+        tk.Label(diagnostic,textvariable=self.upload_diagnostic,bg='#081A30',fg='#FFBE9D',anchor='w',justify='left',wraplength=950,font=('Segoe UI',10)).pack(fill='x',pady=(4,0))
         tk.Label(activity,textvariable=self.activity_files,bg='#081A30',fg='#7FA9CF',anchor='w',justify='left',wraplength=950,font=('Segoe UI',9)).pack(fill='x',padx=18,pady=(0,14))
 
     def update_status_dot(self,variable,dot):
@@ -301,6 +321,9 @@ class Studio:
         key=(self.ps5ip.get().strip(),self.ftp_port.get().strip())
         self.fm_scan_key=key
         self.selected_ppsa=None
+        self.icon_buttons_state(False)
+        self.icon_file_status.set('Noch nicht gescannt')
+        self.icon_permission_status.set('Noch nicht geprüft')
         self.theme_upload_button.config(state='disabled')
         self.connection_status.set('Verbindung wird geprüft …')
         self.ppsa_status.set('Suche läuft …')
@@ -319,6 +342,11 @@ class Studio:
         self.fm_run(task,'discover')
 
     def fm_apply_discovery(self,found):
+        # Persist only after a successful FTP connection; DPAPI is tied to this Windows user.
+        try:
+            save_connection(self.ps5ip.get(),self.ftp_port.get())
+        except (OSError,ValueError) as exc:
+            self.upload_diagnostic.set(f'PS5-IP konnte nicht verschlüsselt gespeichert werden: {exc}')
         self.connection_status.set(f'{self.ui("Verbunden","Reachable")} · {self.ps5ip.get().strip()}:{self.ftp_port.get().strip()}')
         self.discovered_ppsa=list(found)
         if not found:
@@ -348,6 +376,8 @@ class Studio:
                 messagebox.showwarning('Y2JB-Ordner','Bitte eine der gefundenen PPSA-IDs eingeben.')
                 return
         self.selected_ppsa=chosen
+        self.icon_buttons_state(True)
+        self.root.after(100,self.icon_scan)
         self.ppsa_status.set(f'{self.ui("Gefunden","Found")} · {chosen}')
         self.theme_upload_button.config(state='normal')
         self.target_status.set(f'{self.ui("Bereit","Ready")} · /user/appmeta/{chosen}')
@@ -356,6 +386,57 @@ class Studio:
             self.pending_upload_after_discovery=False
             self.fm_info.set('PS5 verbunden · starte den ausstehenden Theme-Upload …')
             self.theme_upload(automatic=True,files=[Path(p) for p in self.last_generated_files])
+
+    def icon_buttons_state(self,enabled):
+        for button in (self.icon_lock_button,self.icon_unlock_button,self.icon_refresh_button):
+            button.config(state='normal' if enabled else 'disabled')
+
+    def icon_scan(self):
+        if not self.selected_ppsa or self.fm_busy:return
+        target=f'/user/appmeta/{self.selected_ppsa}'
+        self.icon_file_status.set('Icon-Dateien werden gesucht …')
+        def task():
+            client=self.ftp_client()
+            entries={row['name']:row for row in client.list(target)}
+            status={}
+            for name in ('icon0.png','icon0.dds'):
+                if name in entries and not entries[name]['is_dir']:
+                    try:permission=client.file_permissions(f'{target}/{name}') or '?'
+                    except Exception:permission='?'
+                    status[name]=permission
+            return status
+        self.fm_run(task,'icon_scan')
+
+    def icon_apply_status(self,status):
+        self.icon_file_status.set('Dateien: '+', '.join(name for name in ('icon0.png','icon0.dds') if name in status) if status else 'Keine icon0.png / icon0.dds gefunden')
+        self.icon_permission_status.set('Rechte: '+(', '.join(f'{name}={mode}' for name,mode in status.items()) if status else '–'))
+
+    def icon_change_permissions(self,mode):
+        if not self.selected_ppsa or self.fm_busy:return
+        target=f'/user/appmeta/{self.selected_ppsa}'
+        label='sperren (444)' if mode=='444' else 'freigeben (644)'
+        if not messagebox.askyesno('Icon-Berechtigungen',f'Vorhandene icon0.png und icon0.dds auf der PS5 {label}?\n\n{target}',parent=self.root):return
+        def task():
+            client=self.ftp_client()
+            entries={row['name'] for row in client.list(target) if not row['is_dir']}
+            changed=[]
+            for name in ('icon0.png','icon0.dds'):
+                if name in entries:
+                    changed.append(name+': '+client.chmod(f'{target}/{name}',mode))
+            if not changed:raise FTPError('Keine Icon-Dateien im Zielordner gefunden')
+            status={name:client.file_permissions(f'{target}/{name}') or '?' for name in ('icon0.png','icon0.dds') if name in entries}
+            return changed,status
+        self.fm_run(task,'icon_chmod')
+
+    def dashboard_package_upload(self):
+        if self.running:
+            self.upload_diagnostic.set('Paket-Erstellung läuft bereits.')
+            return
+        if not any((self.indir/name).is_file() for name,_ in SLOTS):
+            self.upload_diagnostic.set('Paket nicht gestartet: keine PNG-Dateien im Ordner EINGABE.')
+            messagebox.showwarning('Theme Paket hochladen','Bitte zuerst PNG-Dateien in EINGABE ablegen.')
+            return
+        self.start()
 
     def theme_upload(self, automatic=False, files=None):
         self.show_view('dashboard')
@@ -373,6 +454,12 @@ class Studio:
             files=[p for p in files if p.is_file()]
             files += [self.outdir/name.replace('.png','.dds') for name,_ in SLOTS if (self.outdir/name.replace('.png','.dds')).is_file()]
         files=[Path(p) for p in files if Path(p).is_file()]
+        # Do not silently omit the PNG icon when its DDS counterpart is selected.
+        icon_png=self.outdir/'icon0.png'
+        if icon_png.is_file() and any(p.name=='icon0.dds' for p in files) and not any(p.name=='icon0.png' for p in files):
+            files.insert(0,icon_png)
+        if any(p.name=='icon0.dds' for p in files) and not any(p.name=='icon0.png' for p in files):
+            self.upload_diagnostic.set('WARNUNG: icon0.dds vorhanden, icon0.png fehlt im Exportpaket.')
         if not files:
             return messagebox.showinfo('PS5-Upload','Im Exportordner liegen noch keine PNG/DDS-Dateien. Erstelle zuerst das Paket.')
         if not automatic:
@@ -402,43 +489,89 @@ class Studio:
                 answer=messagebox.askyesnocancel('Datei existiert bereits',
                     f'{target}/{local.name}\n\nJa: lokales Backup erstellen und ersetzen\nNein: Datei überspringen\nAbbrechen: weiteren Upload stoppen',parent=self.root)
                 if answer is None:
-                    break
+                    self.upload_diagnostic.set('Abbruch durch Benutzer bei '+local.name+'; noch keine Dateien übertragen.')
+                    self.fm_info.set('Upload abgebrochen: Überschreibbestätigung für '+local.name+' abgebrochen.')
+                    self.target_status.set('Upload durch Benutzer abgebrochen')
+                    return
                 if not answer:
                     continue
                 overwrite=True
             plan.append((local,overwrite,item.get('size') if item else None))
         if not plan:
             self.fm_info.set('Kein Upload ausgeführt · alle Dateien übersprungen oder abgebrochen')
+            self.upload_diagnostic.set('Keine Datei zum Übertragen bestätigt: alle Dateien übersprungen.')
             self.target_status.set('Upload nicht ausgeführt')
             return
         summary='\n'.join(f'{local.name}'+(' · Backup & Ersetzen' if overwrite else ' · Neu anlegen') for local,overwrite,_ in plan)
         if not automatic and not messagebox.askyesno('Upload bestätigen',f'Ziel: {target}\n\n{summary}\n\nFortfahren?',parent=self.root):
             self.fm_info.set('Upload vor dem Start abgebrochen.')
+            self.upload_diagnostic.set('Abbruch durch Benutzer bei der abschließenden Upload-Bestätigung.')
             return
         self.activity_files.set(self.ui('Freigegeben für Upload: ','Approved for upload: ')+', '.join(local.name for local,_,_ in plan))
         self.fm_info.set(self.ui('Sichere bestätigte Originale und lade Dateien hoch …','Backing up confirmed originals and uploading files …'))
         self.fm_progress.set(0)
+        self.upload_diagnostic.set('Upload startet · jede Backup-, Lösch-, Übertragungs- und Prüfphase wird angezeigt.')
         backup_root=ROOT/'BACKUPS'/self.selected_ppsa
+        protect_icons=bool(self.icon_protect.get())
         def transfer():
+            def phase(message):
+                self.events.put(('upload_phase', message))
             import datetime
             stamp=datetime.datetime.now().strftime('%Y%m%d_%H%M%S_%f')
             destination=backup_root/stamp
-            client=self.ftp_client();results=[]
-            for local,overwrite,remote_size in plan:
+            client=self.ftp_client();results=[];icon_notes=[]
+            for index,(local,overwrite,remote_size) in enumerate(plan,1):
+                phase(f'Datei {index}/{len(plan)}: {local.name} · '+('Backup wird vorbereitet' if overwrite else 'Neuer Upload'))
                 remote=f'{target}/{local.name}'
+                is_icon=local.name in ('icon0.png','icon0.dds')
+                backup=None
                 if overwrite:
                     destination.mkdir(parents=True,exist_ok=True)
                     backup=destination/local.name
+                    phase(f'Backup {local.name}: lade Original von PS5 herunter'+(f' ({remote_size:,} Bytes)' if remote_size is not None else ''))
                     client.download(remote,backup,expected_size=remote_size,progress=self.transfer_progress('Backup '+local.name))
+                    phase(f'Backup {local.name}: prüfe heruntergeladene Datei')
                     if not backup.is_file() or (remote_size is not None and backup.stat().st_size!=remote_size):
                         raise FTPError(f'Backup-Prüfung fehlgeschlagen; Datei wurde nicht ersetzt: {remote}')
-                client.upload(local,target,overwrite=overwrite,progress=self.transfer_progress(local.name))
-                results.append(local.name)
+                    phase(f'Backup {local.name}: SHA-256-Vergleich mit PS5 läuft (zweiter Download)')
+                    if hashlib.sha256(backup.read_bytes()).hexdigest()!=client.remote_sha256(remote,progress=self.transfer_progress('SHA-256 '+local.name)):
+                        raise FTPError(f'Backup-Prüfung fehlgeschlagen (SHA-256): {remote}')
+                    # ftpsrv may reject STOR for an existing file; delete only after verified backup.
+                    if is_icon:
+                        icon_notes.append(f'{local.name} entsperrt: '+client.chmod(remote,'644'))
+                    phase(f'{local.name}: gesichertes Original wird auf PS5 gelöscht')
+                    client.delete_file(remote)
+                try:
+                    phase(f'{local.name}: übertrage neue Datei auf PS5')
+                    client.upload(local,target,overwrite=False,progress=self.transfer_progress(local.name))
+                    expected=hashlib.sha256(local.read_bytes()).hexdigest()
+                    phase(f'{local.name}: SHA-256-Prüfung des Uploads (Rücklesen von PS5)')
+                    actual=client.remote_sha256(remote,progress=self.transfer_progress('SHA-256 '+local.name))
+                    if expected!=actual:
+                        raise FTPError(f'Upload-Prüfung fehlgeschlagen (SHA-256): {local.name}')
+                    if is_icon and protect_icons:
+                        icon_notes.append(f'{local.name} geschützt: '+client.chmod(remote,'444'))
+                    results.append(local.name)
+                except Exception as upload_error:
+                    phase(f'FEHLER {local.name}: {upload_error} · '+('Wiederherstellung wird versucht' if backup else 'kein Backup vorhanden'))
+                    if backup is not None:
+                        try:
+                            # Restore the backed-up file if the replacement failed.
+                            if any(row['name']==local.name for row in client.list(target)):
+                                try:client.chmod(remote,'644')
+                                except Exception:pass
+                                client.delete_file(remote)
+                            client.upload(backup,target,overwrite=False)
+                            if hashlib.sha256(backup.read_bytes()).hexdigest()!=client.remote_sha256(remote):
+                                raise FTPError('Wiederhergestellte Datei stimmt nicht mit dem Backup überein')
+                        except Exception as restore_error:
+                            raise FTPError(f'{local.name}: Upload fehlgeschlagen ({upload_error}); BACKUP-WIEDERHERSTELLUNG FEHLGESCHLAGEN: {restore_error}') from restore_error
+                    raise FTPError(f'{local.name}: Upload fehlgeschlagen ({upload_error}); '+('Original aus Backup wiederhergestellt' if backup else 'keine vorherige Datei')) from upload_error
             refreshed=client.list(target)
             wanted={name for name in results}
             if any(not any(row['name']==name for row in refreshed) for name in wanted):
                 raise FTPError('Upload abgeschlossen, aber die aktualisierte Dateiliste ist unvollständig.')
-            return (target,refreshed,results,showpath(destination))
+            return (target,refreshed,results,showpath(destination),icon_notes)
         self.fm_run(transfer,'theme_uploaded')
 
     def rebuild(self):
@@ -523,7 +656,11 @@ class Studio:
         try:
             while True:
                 event,value=self.events.get_nowait()
-                if event=='progress':
+                if event=='upload_phase':
+                    self.upload_diagnostic.set(value)
+                    self.fm_info.set(value)
+                    self.fm_progress.set(0)
+                elif event=='progress':
                     i,total,detail=value;self.progress_value.set(i/total*100);self.status.set(f'{i}/{total}  ·  {detail}')
                     self.fm_info.set(self.ui('Dateien werden erstellt · ','Creating files · ')+detail)
                 elif event=='transfer_progress':
@@ -537,6 +674,12 @@ class Studio:
                     self.connection_status.set(f'{self.ui("Erreichbar","Reachable")} · {self.ps5ip.get().strip()}:{self.ftp_port.get().strip()}')
                     if kind=='discover':self.fm_apply_discovery(data)
                     elif kind=='heartbeat':pass
+                    elif kind=='icon_scan':self.icon_apply_status(data)
+                    elif kind=='icon_chmod':
+                        changed,status=data
+                        self.icon_apply_status(status)
+                        self.fm_info.set('Icon-Berechtigungen geändert · '+', '.join(changed))
+                    
                     elif kind=='theme_preflight':
                         files,target,entries=data
                         self.target_status.set(self.ui('FTP-Zielordner erreichbar','FTP target folder reachable'))
@@ -546,17 +689,20 @@ class Studio:
                         self.target_status.set(self.ui('FTP-Zielordner erreichbar','FTP target folder reachable'))
                         self.theme_confirm_upload(files,target,entries,automatic=True)
                     elif kind=='theme_uploaded':
-                        target,entries,names,backup_path=data
+                        target,entries,names,backup_path,icon_notes=data
                         self.fm_info.set('Upload abgeschlossen und im Zielordner geprüft · '+', '.join(names))
                         self.activity_files.set(self.ui('Erstellt und hochgeladen: ','Created and uploaded: ')+', '.join(names))
                         self.target_status.set(self.ui('Upload bestätigt','Upload verified')+' · '+target)
                         self.fm_progress.set(100)
-                        messagebox.showinfo('Theme-Upload abgeschlossen',f'{len(names)} Datei(en) nach {target} übertragen und geprüft.\nLokale Backups: {backup_path}')
+                        self.upload_diagnostic.set('Erfolgreich: '+str(len(names))+' Dateien übertragen und geprüft.')
+                        self.root.after(150,self.icon_scan)
+                        messagebox.showinfo('Theme-Upload abgeschlossen',f'{len(names)} Datei(en) nach {target} übertragen und geprüft.\nLokale Backups: {backup_path}'+('\n'+'\n'.join(icon_notes) if icon_notes else ''))
                 elif event=='fm_error':
                     self.fm_busy=False
                     kind,error=value
-                    if kind in ('theme_preflight','theme_preflight_auto','theme_uploaded'):
+                    if kind in ('theme_preflight','theme_preflight_auto','theme_uploaded','icon_scan','icon_chmod'):
                         self.fm_info.set('PS5-Upload fehlgeschlagen · '+error)
+                        self.upload_diagnostic.set('FEHLER bei '+kind+': '+error)
                         self.target_status.set(self.ui('Upload fehlgeschlagen','Upload failed'))
                         self.activity_files.set(self.ui('Erstellung abgeschlossen; Upload-Fehler: ','Package created; upload error: ')+error)
                         self.fm_progress.set(0)
@@ -564,6 +710,7 @@ class Studio:
                     else:
                         self._has_confirmed_ftp=False
                         self.fm_info.set('FTP-FEHLER · '+error);self.fm_progress.set(0)
+                        self.upload_diagnostic.set('FTP-FEHLER bei '+kind+': '+error)
                         self.connection_status.set('Verbindung fehlgeschlagen' if kind in ('discover','heartbeat') else 'Nicht bestätigt · FTP-Fehler')
                         if kind=='discover':
                             self.ppsa_status.set('Nicht geprüft')
@@ -579,7 +726,7 @@ class Studio:
                     if self.selected_ppsa and self._has_confirmed_ftp:
                         self.pending_upload_after_discovery=False
                         self.target_status.set(self.ui('Upload wird vorbereitet','Preparing upload'))
-                        self.fm_info.set('Paket erstellt · starte automatischen Theme-Upload …')
+                        self.fm_info.set('Paket erstellt · starte automatischen Theme-Upload …');self.fm_progress.set(0)
                         self.theme_upload(automatic=True,files=[Path(p) for p in generated])
                     else:
                         self.pending_upload_after_discovery=True
@@ -591,7 +738,7 @@ class Studio:
                         self.target_status.set(self.ui('Upload wartet auf PS5-Verbindung','Waiting for PS5 connection'))
                         messagebox.showinfo('Y2JB MrGee',message)
                 else:
-                    self.running=False;self.go.config(state='normal');self.status.set(self.t('error'));self.fm_info.set(self.ui('Paket-Erstellung fehlgeschlagen · ','Package creation failed · ')+value);self.target_status.set(self.ui('Paket nicht erstellt','Package not created'));messagebox.showerror(self.t('error'),value)
+                    self.running=False;self.go.config(state='normal');self.status.set(self.t('error'));self.fm_info.set(self.ui('Paket-Erstellung fehlgeschlagen · ','Package creation failed · ')+value);self.upload_diagnostic.set('PAKET-FEHLER: '+value);self.target_status.set(self.ui('Paket nicht erstellt','Package not created'));messagebox.showerror(self.t('error'),value)
         except queue.Empty:pass
         self.root.after(90,self.poll)
 
