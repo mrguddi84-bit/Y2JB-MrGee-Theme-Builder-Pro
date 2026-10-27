@@ -2,6 +2,8 @@
 
 **Themes erstellen und direkt auf die PS5 übertragen.**
 
+**Version 1.0.1** · [Änderungen / Changelog](CHANGELOG.md)
+
 [🇩🇪 Deutsch](#deutsch) · [🇬🇧 English](#english)
 
 ---
@@ -16,7 +18,10 @@ Y2JB Theme Creator Pro ist eine Windows-App zum Erstellen und Übertragen von Th
 - PNG-Dateien für ein Y2JB-Theme erstellen
 - Automatische Suche unter `/user/appmeta` nach den Y2JB-Ordnern `PPSA01650`, `PPSA01651` und `PPSA01652`
 - Automatischer FTP-Upload nach der Paketerstellung
-- Vorhandene Dateien werden nur nach Bestätigung überschrieben
+- Vorhandene Dateien werden nach Bestätigung mit geprüftem lokalem Backup gesichert und erst dann ersetzt
+- FTP-Uploads werden mit Diagnose, Fortschrittsanzeige und SHA-256-Prüfung überwacht
+- Dashboard erkennt `icon0.png` und `icon0.dds` und zeigt deren Berechtigungen an; Icons lassen sich entsperren (`644`) oder schützen (`444`)
+- PS5-IP und FTP-Port werden nach erfolgreicher Verbindung verschlüsselt mit Windows DPAPI pro Windows-Benutzer gespeichert
 - Windows-EXE zum direkten Starten
 
 ### 🖥️ Dashboard
@@ -49,7 +54,7 @@ Auf der PS5 muss der **ftpsrv-Payload installiert und gestartet** sein. Installi
 1. Lade das Windows-Paket unter **Releases** herunter und entpacke es in einen beschreibbaren Ordner.
 2. Starte `Y2JBThemeCreator.exe`.
 3. Installiere und starte `ftpsrv` auf der PS5.
-4. Verbinde PC und PS5 mit demselben vertrauenswürdigen lokalen Netzwerk. Trage in der App die PS5-IP-Adresse und den FTP-Port ein (Standard: `2121`).
+4. Verbinde PC und PS5 mit demselben vertrauenswürdigen lokalen Netzwerk. Trage die PS5-IP-Adresse und den FTP-Port ein (Standard: `2121`). Nach erfolgreicher Verbindung speichert die App beide Werte lokal verschlüsselt mit Windows DPAPI.
 5. Wähle die Grafiken im Theme Studio aus und erstelle das Paket. Die App durchsucht `/user/appmeta` automatisch nach den Ordnern `PPSA01650`, `PPSA01651` und `PPSA01652` und startet anschließend den FTP-Upload. Bestätige gegebenenfalls das Überschreiben vorhandener Dateien.
 
 ### ⚠️ Sicherheit
@@ -64,7 +69,7 @@ Dieses Projekt ist **inoffiziell** und weder mit Sony Interactive Entertainment 
 
 ### 🛠️ Build-Hinweis
 
-Die vorhandene Windows-EXE wurde für die GitHub-Veröffentlichung nicht verändert oder neu gebaut. Ihre gespeicherte Standard-IP kann von der des veröffentlichten Python-Codes abweichen; eine vollständig reproduzierbare Build-Konfiguration ist nicht enthalten.
+Die Windows-EXE ist ein stabiler Launcher und lädt die versionierte Anwendung aus dem benachbarten Ordner `app`. Version 1.0.1 aktualisiert den Python-Quellcode, ohne den Launcher neu zu bauen. Verbindungsdaten werden pro Windows-Benutzer mit DPAPI verschlüsselt gespeichert.
 
 ---
 
@@ -78,7 +83,10 @@ Y2JB Theme Creator Pro is a Windows app for creating and transferring theme file
 - Create the PNG files required for a Y2JB theme
 - Automatically search `/user/appmeta` for Y2JB folders `PPSA01650`, `PPSA01651`, and `PPSA01652`
 - Automatically upload files over FTP after package creation
-- Existing files are overwritten only after confirmation
+- Existing files are backed up locally and verified before replacement after confirmation
+- FTP uploads show diagnostics and progress and are verified with SHA-256
+- The dashboard detects `icon0.png` and `icon0.dds` and shows their permissions; icons can be unlocked (`644`) or protected (`444`)
+- The PS5 IP and FTP port are saved locally after a successful connection using Windows DPAPI encryption for the current Windows user
 - Ready-to-run Windows executable
 
 ### 🖥️ Dashboard
@@ -107,7 +115,7 @@ The **ftpsrv payload must be installed and running on the PS5**. Install or mana
 1. Download the Windows package from **Releases** and extract it to a writable folder.
 2. Launch `Y2JBThemeCreator.exe`.
 3. Install and start `ftpsrv` on the PS5.
-4. Connect the PC and PS5 to the same trusted local network. Enter the PS5 IP address and FTP port in the app (default: `2121`).
+4. Connect the PC and PS5 to the same trusted local network. Enter the PS5 IP address and FTP port in the app (default: `2121`). After a successful connection, both values are stored locally using Windows DPAPI encryption.
 5. Select your graphics in Theme Studio and create the package. The app automatically scans `/user/appmeta` for folders `PPSA01650`, `PPSA01651`, and `PPSA01652`, then starts the FTP upload. Confirm if existing files need to be overwritten.
 
 ### ⚠️ Security
@@ -122,7 +130,7 @@ This is an **unofficial** project and is not affiliated with or endorsed by Sony
 
 ### 🛠️ Build note
 
-The existing Windows executable was not modified or rebuilt for GitHub publication. Its saved default IP may differ from the published Python source; a fully reproducible build configuration is not provided.
+The Windows executable is a stable launcher that loads the versioned application from the adjacent `app` folder. Version 1.0.1 updates the Python source without rebuilding the launcher. Connection settings are stored per Windows user using DPAPI.
 
 ---
 
