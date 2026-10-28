@@ -1,6 +1,6 @@
 # 🎨 Y2JB Theme Creator v2.0
 
-**🌐 Programmsprachen / Interface languages:** 🇩🇪 Deutsch (DE) · 🇬🇧 Englisch (EN) · [🇬🇧 English version](#-english)
+**🌐 Unterstützte App-Sprachen / Supported app languages:** 🇩🇪 Deutsch · 🇬🇧 Englisch · 🇪🇸 Spanisch · 🇫🇷 Französisch · 🇵🇹 Portugiesisch · [🇬🇧 English version](#-english)
 
 > **⚠️ Voraussetzung / Requirement:** Für den FTP-Upload muss der `ftpsrv`-Payload auf einer kompatiblen PS5 installiert und gestartet sein (Standardport `2121`). The `ftpsrv` payload must be installed and running on a compatible PS5 for FTP uploads (default port `2121`).
 
@@ -22,7 +22,7 @@ Version 2.0 ist die aktuelle Ausgabe von Y2JB Theme Creator. Erstelle **Y2JB-The
 - Verbindung zur PS5 mit IP-Adresse und FTP-Port; Einstellungen lokal und pro Windows-Benutzer mit DPAPI geschützt
 - Vereinfachte Ordnerstruktur mit `EINGABE` und `PS5_Upload`
 - Windows-Installer mit auswählbarem Installationsverzeichnis
-- Bedienoberfläche auf Deutsch und Englisch
+- Bedienoberfläche auf Deutsch, Englisch, Spanisch, Französisch und Portugiesisch
 
 ### 🖥️ Screenshots – Deutsch
 
@@ -78,7 +78,7 @@ Y2JB Theme Creator v2.0 is the current release. Create **Y2JB theme files** from
 - PS5 connection by IP address and FTP port; settings are stored locally and protected per Windows user with DPAPI
 - Simplified folder layout with `EINGABE` and `PS5_Upload`
 - Windows installer with a selectable installation directory
-- User interface available in German and English
+- User interface available in German, English, Spanish, French, and Portuguese
 
 ### 🖥️ Screenshots – English
 
