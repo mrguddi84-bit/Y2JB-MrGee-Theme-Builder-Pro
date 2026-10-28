@@ -1,5 +1,9 @@
 # 🎨 Y2JB Theme Creator v2.0
 
+**🌐 Unterstützte Sprachen / Supported languages:** Deutsch und English · [🇬🇧 English version](#-english)
+
+> **⚠️ Voraussetzung / Requirement:** Für den FTP-Upload muss der `ftpsrv`-Payload auf einer kompatiblen PS5 installiert und gestartet sein (Standardport `2121`). The `ftpsrv` payload must be installed and running on a compatible PS5 for FTP uploads (default port `2121`).
+
 **Kostenlose Windows-Freeware · Proprietär · Closed Source**
 
 [⬇️ Windows-Installer herunterladen](https://github.com/mrguddi84-bit/Y2JB-MrGee-Theme-Builder-Pro/releases/download/v2.0/Y2JBThemeCreator_v2.0_Setup.exe) · [Alle Release-Details](https://github.com/mrguddi84-bit/Y2JB-MrGee-Theme-Builder-Pro/releases/latest) · [Änderungsprotokoll](CHANGELOG.md)
@@ -18,6 +22,7 @@ Version 2.0 ist die aktuelle Ausgabe von Y2JB Theme Creator. Erstelle **Y2JB-The
 - Verbindung zur PS5 mit IP-Adresse und FTP-Port; Einstellungen lokal und pro Windows-Benutzer mit DPAPI geschützt
 - Vereinfachte Ordnerstruktur mit `EINGABE` und `PS5_Upload`
 - Windows-Installer mit auswählbarem Installationsverzeichnis
+- Bedienoberfläche auf Deutsch und Englisch
 
 ### 📐 PNG-Dateien
 
@@ -35,7 +40,7 @@ Das Hintergrundmotiv muss unter allen drei Dateinamen vorhanden sein.
 1. Lade `Y2JBThemeCreator_v2.0_Setup.exe` über den [v2.0-Release](https://github.com/mrguddi84-bit/Y2JB-MrGee-Theme-Builder-Pro/releases/latest) herunter und starte den Installer.
 2. Wähle den Installationsordner und schließe die Installation ab.
 3. Bereite deine PNG-Dateien im Ordner `EINGABE` vor und öffne den Theme Creator.
-4. Starte auf der kompatiblen PS5 den FTP-Server-Payload `ftpsrv` (üblicher Port: `2121`).
+4. Stelle sicher, dass der `ftpsrv`-Payload auf der kompatiblen PS5 läuft (üblicher Port: `2121`).
 5. Trage im Dashboard die PS5-IP-Adresse und den FTP-Port ein und verbinde dich.
 6. Erstelle das Y2JB-Theme-Paket. Der Status wird im Dashboard angezeigt; bestätige die Rückfrage, falls Dateien auf der PS5 überschrieben werden sollen.
 
@@ -63,6 +68,7 @@ Y2JB Theme Creator v2.0 is the current release. Create **Y2JB theme files** from
 - PS5 connection by IP address and FTP port; settings are stored locally and protected per Windows user with DPAPI
 - Simplified folder layout with `EINGABE` and `PS5_Upload`
 - Windows installer with a selectable installation directory
+- User interface available in German and English
 
 ### 📐 PNG requirements
 
@@ -80,7 +86,7 @@ The background artwork must be present under all three filenames.
 1. Download and run `Y2JBThemeCreator_v2.0_Setup.exe` from the [v2.0 release](https://github.com/mrguddi84-bit/Y2JB-MrGee-Theme-Builder-Pro/releases/latest).
 2. Choose an installation directory and complete setup.
 3. Prepare your PNG files in `EINGABE` and open Theme Creator.
-4. Start the `ftpsrv` FTP payload on your compatible PS5 (usual port: `2121`).
+4. Make sure the `ftpsrv` payload is running on your compatible PS5 (usual port: `2121`).
 5. Enter the PS5 IP address and FTP port in the Dashboard and connect.
 6. Create the Y2JB theme package. The Dashboard shows progress; confirm if existing files on the PS5 should be replaced.
 
