@@ -19,14 +19,11 @@ Version 2.0 ist die aktuelle Ausgabe von Y2JB Theme Creator. Erstelle **Y2JB-The
 - Vereinfachte Ordnerstruktur mit `EINGABE` und `PS5_Upload`
 - Windows-Installer mit auswählbarem Installationsverzeichnis
 
-### 🖼️ Screenshots und Beispielgrafiken
+### 🖼️ Beispielgrafiken für Y2JB-Themes
 
-Die vorhandenen Dashboard-Bilder und Beispielgrafiken bleiben als Projektbeispiele erhalten. Die Dashboard-Aufnahmen zeigen eine frühere Oberfläche; das Layout von v2.0 wurde überarbeitet.
-
-| Dashboard-Beispiel | Theme-Beispiele |
+| Beispiel-Icon | Beispiel-Hintergrund |
 |---|---|
-| ![Y2JB Theme Creator – Dashboard-Beispiel](assets/dashboard-de.png) | ![Beispiel-Icon](assets/file_000000008d0082118dce526bd96d0303.png) |
-| ![Y2JB Theme Creator – Dashboard nach Verbindung](assets/dashboard-connected.png) | ![Beispiel-Hintergrund](assets/file_00000000f9748210917ae68e43114c88.png) |
+| ![Beispiel-Icon für ein Y2JB-Theme](assets/file_000000008d0082118dce526bd96d0303.png) | ![Beispiel-Hintergrund für ein Y2JB-Theme](assets/file_00000000f9748210917ae68e43114c88.png) |
 
 ### 📐 PNG-Dateien
 
@@ -73,14 +70,11 @@ Y2JB Theme Creator v2.0 is the current release. Create **Y2JB theme files** from
 - Simplified folder layout with `EINGABE` and `PS5_Upload`
 - Windows installer with a selectable installation directory
 
-### 🖼️ Screenshots and sample artwork
+### 🖼️ Sample artwork for Y2JB themes
 
-The existing dashboard images and sample artwork are retained as project examples. The dashboard screenshots show an earlier interface; the v2.0 layout has been redesigned.
-
-| Dashboard example | Theme samples |
+| Sample icon | Sample background |
 |---|---|
-| ![Y2JB Theme Creator dashboard example](assets/dashboard-en.png) | ![Sample icon](assets/file_000000008d0082118dce526bd96d0303.png) |
-| ![Y2JB Theme Creator connected dashboard](assets/dashboard-connected.png) | ![Sample background](assets/file_00000000f9748210917ae68e43114c88.png) |
+| ![Sample icon for a Y2JB theme](assets/file_000000008d0082118dce526bd96d0303.png) | ![Sample background for a Y2JB theme](assets/file_00000000f9748210917ae68e43114c88.png) |
 
 ### 📐 PNG requirements
 
