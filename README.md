@@ -19,12 +19,6 @@ Version 2.0 ist die aktuelle Ausgabe von Y2JB Theme Creator. Erstelle **Y2JB-The
 - Vereinfachte Ordnerstruktur mit `EINGABE` und `PS5_Upload`
 - Windows-Installer mit auswählbarem Installationsverzeichnis
 
-### 🖼️ Beispielgrafiken für Y2JB-Themes
-
-| Beispiel-Icon | Beispiel-Hintergrund |
-|---|---|
-| ![Beispiel-Icon für ein Y2JB-Theme](assets/file_000000008d0082118dce526bd96d0303.png) | ![Beispiel-Hintergrund für ein Y2JB-Theme](assets/file_00000000f9748210917ae68e43114c88.png) |
-
 ### 📐 PNG-Dateien
 
 Lege die Grafiken im Ordner `EINGABE` ab:
@@ -69,12 +63,6 @@ Y2JB Theme Creator v2.0 is the current release. Create **Y2JB theme files** from
 - PS5 connection by IP address and FTP port; settings are stored locally and protected per Windows user with DPAPI
 - Simplified folder layout with `EINGABE` and `PS5_Upload`
 - Windows installer with a selectable installation directory
-
-### 🖼️ Sample artwork for Y2JB themes
-
-| Sample icon | Sample background |
-|---|---|
-| ![Sample icon for a Y2JB theme](assets/file_000000008d0082118dce526bd96d0303.png) | ![Sample background for a Y2JB theme](assets/file_00000000f9748210917ae68e43114c88.png) |
 
 ### 📐 PNG requirements
 
