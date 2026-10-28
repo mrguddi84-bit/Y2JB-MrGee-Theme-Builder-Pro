@@ -24,6 +24,16 @@ Version 2.0 ist die aktuelle Ausgabe von Y2JB Theme Creator. Erstelle **Y2JB-The
 - Windows-Installer mit auswählbarem Installationsverzeichnis
 - Bedienoberfläche auf Deutsch und Englisch
 
+### 🖥️ Screenshots – Deutsch
+
+**Dashboard**
+
+![Y2JB Theme Creator Dashboard – Deutsch](assets/v2.0-dashboard-de.png)
+
+**ThemeCreator**
+
+![Y2JB Theme Creator ThemeCreator – Deutsch](assets/v2.0-themecreator-de.png)
+
 ### 📐 PNG-Dateien
 
 Lege die Grafiken im Ordner `EINGABE` ab:
@@ -69,6 +79,16 @@ Y2JB Theme Creator v2.0 is the current release. Create **Y2JB theme files** from
 - Simplified folder layout with `EINGABE` and `PS5_Upload`
 - Windows installer with a selectable installation directory
 - User interface available in German and English
+
+### 🖥️ Screenshots – English
+
+**Dashboard**
+
+![Y2JB Theme Creator Dashboard – English](assets/v2.0-dashboard-en.png)
+
+**ThemeCreator**
+
+![Y2JB Theme Creator ThemeCreator – English](assets/v2.0-themecreator-en.png)
 
 ### 📐 PNG requirements
 
