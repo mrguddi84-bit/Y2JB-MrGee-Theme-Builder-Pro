@@ -1,6 +1,6 @@
 # 🎨 Y2JB Theme Creator v2.0
 
-**🌐 Unterstützte Sprachen / Supported languages:** Deutsch und English · [🇬🇧 English version](#-english)
+**🌐 Programmsprachen / Interface languages:** 🇩🇪 Deutsch (DE) · 🇬🇧 Englisch (EN) · [🇬🇧 English version](#-english)
 
 > **⚠️ Voraussetzung / Requirement:** Für den FTP-Upload muss der `ftpsrv`-Payload auf einer kompatiblen PS5 installiert und gestartet sein (Standardport `2121`). The `ftpsrv` payload must be installed and running on a compatible PS5 for FTP uploads (default port `2121`).
 
