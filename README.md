@@ -2,7 +2,7 @@
 
 **🌐 Unterstützte App-Sprachen / Supported app languages:** 🇩🇪 Deutsch · 🇬🇧 Englisch · 🇪🇸 Spanisch · 🇫🇷 Französisch · 🇵🇹 Portugiesisch · [🇬🇧 English version](#-english)
 
-> **⚠️ Voraussetzung / Requirement:** Für den FTP-Upload muss der `ftpsrv`-Payload auf einer kompatiblen PS5 installiert und gestartet sein (Standardport `2121`). The `ftpsrv` payload must be installed and running on a compatible PS5 for FTP uploads (default port `2121`).
+> **⚠️ Voraussetzung / Requirement:** Für den FTP-Upload muss der [ftpsrv](https://github.com/ps5-payload-dev/ftpsrv)-Payload auf einer kompatiblen PS5 installiert und gestartet sein (Standardport `2121`). The [ftpsrv](https://github.com/ps5-payload-dev/ftpsrv) payload must be installed and running on a compatible PS5 for FTP uploads (default port `2121`).
 
 **Kostenlose Windows-Freeware · Proprietär · Closed Source**
 
