@@ -1,32 +1,31 @@
-# Third-party licenses and attribution
+# Third-party licenses / Lizenzen Dritter — Y2JB Theme Creator 3.0
 
-The original Y2JB application is proprietary (see `LICENSE`). Third-party code retains its own permissions and notices.
+This inventory describes the components used by the current v3.0 portable Windows app. The Y2JB Theme Creator application remains proprietary; third-party components retain their own copyright and license terms.
 
-| Included component | Evidence in distributed EXE | Accompanying notice |
+Diese Übersicht beschreibt die Komponenten der aktuellen portablen Windows-App v3.0. Die Y2JB-Theme-Creator-Anwendung bleibt proprietär; für Drittanbieterkomponenten gelten deren jeweilige Urheber- und Lizenzbedingungen.
+
+| Component / Komponente | Use in the app / Verwendung | License / Lizenz and source / Lizenz und Quelle |
 | --- | --- | --- |
-| Microsoft DirectXTex `texconv.exe` | Owner confirms official GitHub download; exact release not authenticated | `licenses/DirectXTex-MIT.txt` |
-| CPython runtime | PyInstaller archive identifies `python312.dll` / Python 3.12 | Official PSF license: https://github.com/python/cpython/blob/3.12/LICENSE (exact patch and bundled notices not independently recovered) |
-| Pillow 13.0.0 | Embedded `pillow-13.0.0.dist-info` | `licenses/Pillow-13.0.0-LICENSE.txt`, `licenses/Pillow-13.0.0-SBOM.json` |
-| tkinterdnd2 0.7.0 | Embedded `tkinterdnd2-0.7.0.dist-info` | `licenses/TkinterDnD2-0.7.0-MIT.txt` |
-| TkDnD 2.10.3 binaries | Embedded filenames including `libtkdnd2.10.3.dll` | `licenses/TkDnD-upstream-license.terms` (upstream copyright and permission notice; exact 2.10.3 package provenance not independently authenticated) |
-| Tcl/Tk 8.6 | `tcl86t.dll`, `tk86t.dll`, Tk data | `licenses/TclTk-license.terms` (extracted from embedded Tk data) |
-| Vendored importlib_metadata 8.7.1 | Embedded setuptools vendor metadata | `licenses/importlib_metadata-8.7.1-LICENSE.txt` |
-| PyInstaller | Verified PyInstaller one-file archive; exact PyInstaller version not recovered | https://pyinstaller.org/en/stable/license.html (special exception for bundled proprietary applications) |
+| CPython 3.12.10 | Application runtime and standard library / Laufzeit und Standardbibliothek | PSF License 2 and applicable historical component terms / PSF-Lizenz 2 und geltende Komponentenbedingungen — [Python license](https://docs.python.org/3.12/license.html) |
+| Tcl/Tk 8.6 | Tkinter GUI / Tkinter-Oberfläche | Tcl/Tk BSD-style terms / BSD-artige Bedingungen — [Tcl/Tk license](https://www.tcl.tk/software/tcltk/license.html) |
+| Pillow 13.0.0 | Image processing, resizing and PNG handling / Bildverarbeitung, Skalierung und PNG | MIT-CMU and included third-party notices / MIT-CMU und enthaltene Drittanbieterhinweise — [Pillow](https://github.com/python-pillow/Pillow) |
+| tkinterdnd2 0.7.0 | Drag-and-drop integration / Drag-and-drop-Integration | MIT — [tkinterdnd2](https://github.com/Eliav2/tkinterdnd2) |
+| TkDnD 2.10.3 | Native drag-and-drop components for Tk / Native Drag-and-drop-Komponenten für Tk | BSD-style upstream terms / BSD-artige Upstream-Bedingungen — [TkDnD](https://github.com/petasis/tkdnd) |
+| ispc_texcomp 1.0.1 | Native BC7 texture encoding / Native BC7-Texturcodierung | MIT — [Python bindings](https://github.com/K0lb3/ispc_texcomp_py) |
+| zftpd payload 1.7.0 | Included PS5 FTP payload, started through an available elfldr service / Enthaltener PS5-FTP-Payload, Start über einen verfügbaren elfldr-Dienst | MIT, copyright Seregon — [zftpd](https://github.com/seregonwar/zftpd) |
+| Nuitka 4.3.1 | Compiler used for the portable Windows build / Compiler für den portablen Windows-Build | AGPLv3 compiler with runtime exception for compiled applications — [Nuitka runtime exception](https://github.com/Nuitka/Nuitka/blob/develop/LICENSE-RUNTIME.txt) |
+| ftpsrv | Optional official PS5 FTP payload. It is fetched by the PS5 from the upstream release when launched in the app; it is not included in the Windows app / Optionaler offizieller PS5-FTP-Payload. Beim App-Start lädt ihn die PS5 aus dem Upstream-Release; er ist nicht in der Windows-App enthalten. | Upstream license applies to that separately downloaded payload / Für den separat heruntergeladenen Payload gilt die Upstream-Lizenz — [ps5-payload-dev/ftpsrv](https://github.com/ps5-payload-dev/ftpsrv) |
 
-Pillow's embedded license document contains multiple third-party notices, and the embedded CycloneDX SBOM inventories image-codec dependencies. These are included unchanged. The upstream TkDnD and Python license links should be retained; the corresponding exact historical files could not be authenticated from the EXE alone. The present inventory is not a legal certification or antivirus scan.
+### Redistribution / Weitergabe
 
-PlayStation and PS5 are trademarks of their respective owners. This independent community project is not affiliated with or endorsed by Sony Interactive Entertainment.
+Retain the applicable copyright notices and full license texts when redistributing third-party components or payloads. The MIT, BSD-style, Tcl/Tk and PSF terms do not require publishing the Y2JB application source code. Nuitka's runtime exception applies to the compiled application; it does not change the license of the Nuitka compiler itself.
 
+Bei der Weitergabe von Drittanbieterkomponenten oder Payloads müssen die geltenden Urheberhinweise und vollständigen Lizenztexte erhalten bleiben. Die MIT-, BSD-artigen, Tcl/Tk- und PSF-Bedingungen verlangen nicht die Veröffentlichung des Y2JB-Anwendungscodes. Nuitkas Runtime Exception gilt für die kompilierte Anwendung; die Lizenz des Nuitka-Compilers selbst bleibt davon unberührt.
 
-## Binary provenance update (26 October 2026)
+Windows, PlayStation and PS5 are trademarks of their respective owners. This independent project is not affiliated with or endorsed by Sony Interactive Entertainment.
 
-- `tools/texconv.exe`: embedded Windows file/product version **2026.4.1.1** (Microsoft DirectXTex March 2026 release family); Microsoft source: https://github.com/microsoft/DirectXTex/releases/tag/mar2026 . Official asset hash matching remains unverified.
-- `TkDnD 2.10.3`: Georgios Petasis et al.; upstream project https://github.com/petasis/tkdnd ; upstream BSD-style terms and copyright notice must be retained for distribution. Version-matched notice inside the binary not yet established.
-- Python 3.12 and PyInstaller: exact patch/build versions are not established from the supplied materials; this alone does not preclude proprietary redistribution.
+Windows, PlayStation und PS5 sind Marken der jeweiligen Rechteinhaber. Dieses unabhängige Projekt ist nicht mit Sony Interactive Entertainment verbunden und wird nicht von Sony unterstützt.
 
-## TkDnD copyright notice
+**Inventory reviewed:** 31 October 2026, based on the v3.0 app and supplied component inventory. License obligations are summarized for attribution and are not a legal opinion.
 
-The upstream license notice by Georgios Petasis (including the Kevin Walzer/WordTech attribution) is included verbatim at `licenses/TkDnD-upstream-license.terms`. The upstream text requires preserving existing copyright notices and including this notice in distributions. Source: https://github.com/petasis/tkdnd/blob/master/license.terms . The bundled 2.10.3 binary has not been hash-matched against a corresponding original distribution.
-
-
-Official tkinterdnd2 0.7.0 wheel: https://pypi.org/project/tkinterdnd2/0.7.0/ (SHA-256 f93d4f5ad439648ba1673f15db3e271cdd08f075c87f43553ffcdde4e634a717). The published wheel itself was not available for binary hash matching in this review; see PROVENANCE_STATUS.md.
+**Prüfstand:** 31. Oktober 2026, basierend auf der App v3.0 und der bereitgestellten Komponentenliste. Die Lizenzpflichten sind zu Informationszwecken zusammengefasst und stellen keine Rechtsberatung dar.
