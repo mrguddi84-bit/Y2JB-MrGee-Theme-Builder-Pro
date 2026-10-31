@@ -1,119 +1,111 @@
-# 🎨 Y2JB Theme Creator v2.0
+<div align="center">
 
-**🌐 Unterstützte App-Sprachen / Supported app languages:** 🇩🇪 Deutsch · 🇬🇧 Englisch · 🇪🇸 Spanisch · 🇫🇷 Französisch · 🇵🇹 Portugiesisch · [🇬🇧 English version](#-english)
+# 🎮 Y2JB Theme Creator 3.0
 
-> **⚠️ Voraussetzung / Requirement:** Für FTP-Uploads muss der [ftpsrv](https://github.com/ps5-payload-dev/ftpsrv)-Payload auf einer kompatiblen PS5 installiert und gestartet sein (Standardport `2121`). Du kannst ihn z. B. über den [PS5 Payload Manager](https://github.com/itsPLK/ps5-payload-manager) installieren und starten. The [ftpsrv](https://github.com/ps5-payload-dev/ftpsrv) payload must be installed and running on a compatible PS5 for FTP uploads (default port `2121`). You can also install and launch it through [PS5 Payload Manager](https://github.com/itsPLK/ps5-payload-manager).
+**Create · Customize · Upload**
 
-**Kostenlose Windows-Freeware · Proprietär · Closed Source**
+![Version](https://img.shields.io/badge/version-3.0-blue) ![Windows](https://img.shields.io/badge/Windows-10%20%7C%2011-0078D6) ![Portable](https://img.shields.io/badge/build-portable-success) ![BC7](https://img.shields.io/badge/encoder-BC7-purple)
 
-[⬇️ Windows-Installer herunterladen](https://github.com/mrguddi84-bit/Y2JB-MrGee-Theme-Builder-Pro/releases/download/v2.0/Y2JBThemeCreator_v2.0_Setup.exe) · [Alle Release-Details](https://github.com/mrguddi84-bit/Y2JB-MrGee-Theme-Builder-Pro/releases/latest) · [Änderungsprotokoll](CHANGELOG.md)
+**Developed by MrGee with AI assistance**
 
-Version 2.0 ist die aktuelle Ausgabe von Y2JB Theme Creator. Erstelle **Y2JB-Themes** aus eigenen PNG-Grafiken und übertrage die dafür benötigten Dateien über FTP auf eine kompatible PS5 mit laufendem `ftpsrv`-Payload. Das Programm wird kostenlos als proprietäre Software angeboten; der Python-Quellcode von Version 2.0 wird nicht veröffentlicht.
+[🇩🇪 Deutsch](README.de.md) · **🇬🇧 English** · [🇪🇸 Español](README.es.md) · [🇫🇷 Français](README.fr.md) · [🇵🇹 Português](README.pt.md)
 
-## 🇩🇪 Deutsch
+[**Download / Releases**](https://github.com/mrguddi84-bit/Y2JB-MrGee-Theme-Builder-Pro/releases) · [**Changelog**](https://github.com/mrguddi84-bit/Y2JB-MrGee-Theme-Builder-Pro/blob/main/CHANGELOG.md) · [**Credits**](https://github.com/mrguddi84-bit/Y2JB-MrGee-Theme-Builder-Pro/blob/main/CREDITS.md)
 
-### ✨ Funktionen
-
-- Kompaktes **Theme Studio** zum Vorbereiten von Icon und Hintergrund
-- Erstellung der für Y2JB benötigten Theme-Dateien aus PNG-Grafiken
-- FTP-Upload auf eine kompatible PS5 mit laufendem `ftpsrv`
-- Rückfrage, bevor vorhandene Dateien überschrieben werden
-- Statusanzeige für Paketerstellung und Upload im Dashboard
-- Verbindung zur PS5 mit IP-Adresse und FTP-Port; Einstellungen lokal und pro Windows-Benutzer mit DPAPI geschützt
-- Vereinfachte Ordnerstruktur mit `EINGABE` und `PS5_Upload`
-- Windows-Installer mit auswählbarem Installationsverzeichnis
-- Bedienoberfläche auf Deutsch, Englisch, Spanisch, Französisch und Portugiesisch
-
-### 🖥️ Screenshots – Deutsch
-
-**Dashboard**
-
-![Y2JB Theme Creator Dashboard – Deutsch](assets/v2.0-dashboard-de.png)
-
-**ThemeCreator**
-
-![Y2JB Theme Creator ThemeCreator – Deutsch](assets/v2.0-themecreator-de.png)
-
-### 📐 PNG-Dateien
-
-Lege die Grafiken im Ordner `EINGABE` ab:
-
-| Grafik | Größe | Dateiname |
-|---|---:|---|
-| Icon | 512 × 512 px | `icon0.png` |
-| Hintergrund | 3840 × 2160 px | `pic0.png`, `pic1.png`, `pic2.png` |
-
-Das Hintergrundmotiv muss unter allen drei Dateinamen vorhanden sein.
-
-### 🚀 Installation und Verwendung
-
-1. Lade `Y2JBThemeCreator_v2.0_Setup.exe` über den [v2.0-Release](https://github.com/mrguddi84-bit/Y2JB-MrGee-Theme-Builder-Pro/releases/latest) herunter und starte den Installer.
-2. Wähle den Installationsordner und schließe die Installation ab.
-3. Bereite deine PNG-Dateien im Ordner `EINGABE` vor und öffne den Theme Creator.
-4. Stelle sicher, dass der `ftpsrv`-Payload auf der kompatiblen PS5 läuft (üblicher Port: `2121`).
-5. Trage im Dashboard die PS5-IP-Adresse und den FTP-Port ein und verbinde dich.
-6. Erstelle das Y2JB-Theme-Paket. Der Status wird im Dashboard angezeigt; bestätige die Rückfrage, falls Dateien auf der PS5 überschrieben werden sollen.
-
-**Sicherheit:** FTP überträgt Daten unverschlüsselt. Verwende den Upload nur in einem vertrauenswürdigen lokalen Netzwerk und veröffentliche den FTP-Dienst nicht im Internet. Änderungen an der Konsole erfolgen auf eigene Verantwortung.
-
-### 🔒 Lizenz und Hinweise
-
-Y2JB Theme Creator v2.0 ist kostenlose, proprietäre Software. Der v2.0-Python-Quellcode wird nicht öffentlich bereitgestellt. © 2026 MrGee. Alle Rechte vorbehalten. Drittanbieterkomponenten behalten ihre eigenen Lizenzen und Hinweise; siehe [LICENSE](LICENSE), [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md), [CREDITS.md](CREDITS.md) und den Ordner [`licenses`](licenses/).
-
-Dieses unabhängige Projekt ist **inoffiziell** und steht nicht in Verbindung mit Sony Interactive Entertainment. Marken Dritter gehören ihren jeweiligen Inhabern.
+</div>
 
 ---
 
-## 🇬🇧 English
+## ✨ Create your own Y2JB themes
 
-Y2JB Theme Creator v2.0 is the current release. Create **Y2JB theme files** from custom PNG artwork and transfer them over FTP to a compatible PS5 running the `ftpsrv` payload. The application is free to use and proprietary; v2.0 Python source code is not publicly distributed.
+Convert your own PNG artwork into Y2JB theme files, customize icons and 4K backgrounds, and upload them to a compatible PS5. Y2JB Theme Creator is an independent Windows homebrew utility.
 
-### ✨ Features
+[Features](#features) · [Quick start](#quick-start) · [Image specifications](#image-specifications) · [FTP payloads and requirements](#ftp-payloads) · [BC7 performance — measured results](#bc7-benchmarks) · [Interface themes](#screenshots) · [Safety notes](#safety) · [Credits and disclaimer](#credits)
 
-- Compact **Theme Studio** for preparing icon and background artwork
-- Create the theme files required by Y2JB from PNG artwork
-- FTP upload to a compatible PS5 running `ftpsrv`
-- Confirmation before overwriting existing files
-- Dashboard status for package creation and upload
-- PS5 connection by IP address and FTP port; settings are stored locally and protected per Windows user with DPAPI
-- Simplified folder layout with `EINGABE` and `PS5_Upload`
-- Windows installer with a selectable installation directory
-- User interface available in German, English, Spanish, French, and Portuguese
+<a id="features"></a>
+## 🚀 Features
 
-### 🖥️ Screenshots – English
+| | |
+|---|---|
+| 🎨 | Convert custom PNG graphics into Y2JB theme files |
+| 🖼️ | 4K backgrounds (3840 × 2160) and 512 × 512 icons |
+| ⚡ | Native parallel BC7 DDS encoding with Fast and Balanced profiles |
+| 📡 | FTP management: bundled zftpd and official ftpsrv launch |
+| 🔍 | FTP diagnostics, target detection and upload progress |
+| 🛡️ | Backups, restore workflows and SHA-256 upload verification |
+| ✏️ | Edit Y2JB app names with database backup and restore |
+| 🎭 | Classic, Minimal and Neon interface themes |
+| 🌍 | German, English, Spanish, French and Portuguese |
 
-**Dashboard**
+<a id="quick-start"></a>
+## 🛠️ Quick start
 
-![Y2JB Theme Creator Dashboard – English](assets/v2.0-dashboard-en.png)
+1. Download the portable Windows release, extract it and launch `Y2JBThemeCreator.exe`.
+2. Enter your PS5 IP address. Launch bundled zftpd via a reachable elfldr service, or start official ftpsrv through the app. An already running FTP server is also supported.
+3. Select PNG images from **any folder on your computer** in Theme Creator.
+4. Create the Y2JB theme files and optionally upload them via FTP.
 
-**ThemeCreator**
+<a id="image-specifications"></a>
+## 🖼️ Image specifications
 
-![Y2JB Theme Creator ThemeCreator – English](assets/v2.0-themecreator-en.png)
+| File | Purpose | Resolution |
+|---|---|---|
+| `icon0.png` | Theme icon | 512 × 512 |
+| `pic0.png` | Background 1 | 3840 × 2160 |
+| `pic1.png` | Background 2 | 3840 × 2160 |
+| `pic2.png` | Background 3 | 3840 × 2160 |
 
-### 📐 PNG requirements
+The application resizes artwork to the required output dimensions. One image may be reused for multiple backgrounds.
 
-Place your artwork in the `EINGABE` folder:
+<a id="ftp-payloads"></a>
+## 📡 FTP payloads and requirements
 
-| Image | Dimensions | Filename |
-|---|---:|---|
-| Icon | 512 × 512 px | `icon0.png` |
-| Background | 3840 × 2160 px | `pic0.png`, `pic1.png`, `pic2.png` |
+**zftpd v1.7.0 is bundled** with the application. The app can start it through an accessible elfldr service. **ftpsrv is not bundled:** using the built-in ftpsrv action, the **PS5 fetches the official ELF directly from the ftpsrv GitHub release** and starts it through elfldr. This requires PS5 internet access. Alternatively, start ftpsrv via a compatible Payload Manager. The app then checks FTP availability.
 
-The background artwork must be present under all three filenames.
+- [Official ftpsrv repository](https://github.com/ps5-payload-dev/ftpsrv)
+- [Official ftpsrv ELF release](https://github.com/ps5-payload-dev/ftpsrv/releases/latest/download/ftpsrv-ps5.elf)
+- zftpd v1.7.0: bundled in the Windows build, with its third-party license.
 
-### 🚀 Installation and usage
+<a id="bc7-benchmarks"></a>
+## ⚡ BC7 performance — measured results
 
-1. Download and run `Y2JBThemeCreator_v2.0_Setup.exe` from the [v2.0 release](https://github.com/mrguddi84-bit/Y2JB-MrGee-Theme-Builder-Pro/releases/latest).
-2. Choose an installation directory and complete setup.
-3. Prepare your PNG files in `EINGABE` and open Theme Creator.
-4. Make sure the `ftpsrv` payload is running on your compatible PS5 (usual port: `2121`).
-5. Enter the PS5 IP address and FTP port in the Dashboard and connect.
-6. Create the Y2JB theme package. The Dashboard shows progress; confirm if existing files on the PS5 should be replaced.
+Real-artwork comparison on one test PC. Fast was about **8.7× faster for the icon** and **24% faster for the 4K background** than the previous encoder. Both test images also achieved higher PSNR. Results vary with CPU, artwork and settings.
 
-**Security:** FTP traffic is not encrypted. Use uploads only on a trusted local network and do not expose the FTP service to the internet. You are responsible for changes to your console.
+### Icon — 512 × 512
 
-### 🔒 License and notices
+| Encoder | Time | Quality (PSNR) |
+|---|---:|---:|
+| **Y2JB Fast** | **0.026** s | 35.43 dB |
+| Y2JB Balanced | 0.057 s | **36.96** dB |
+| Previous encoder | 0.225 s | 33.78 dB |
 
-Y2JB Theme Creator v2.0 is free proprietary software. v2.0 Python source code is not publicly distributed. © 2026 MrGee. All rights reserved. Third-party components retain their own licenses and notices; see [LICENSE](LICENSE), [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md), [CREDITS.md](CREDITS.md), and the [`licenses`](licenses/) folder.
+### Background — 3840 × 2160
 
-This independent project is **unofficial** and is not affiliated with Sony Interactive Entertainment. Third-party trademarks are the property of their respective owners.
+| Encoder | Time | Quality (PSNR) |
+|---|---:|---:|
+| **Y2JB Fast** | **0.677** s | 45.73 dB |
+| Y2JB Balanced | 1.349 s | **46.11** dB |
+| Previous encoder | 0.896 s | 44.51 dB |
+
+![BC7 benchmark comparison](assets/bc7-benchmark.svg)
+
+> Test results are specific to the measured images and hardware. PSNR is a metric, not a universal visual-quality guarantee.
+
+<a id="screenshots"></a>
+## 🎭 Interface themes
+
+| Classic | Minimal | Neon |
+|---|---|---|
+| ![Classic](assets/dashboard-classic.png) | ![Minimal](assets/dashboard-minimal.png) | ![Neon](assets/dashboard-neon.png) |
+
+<a id="safety"></a>
+## ⚠️ Safety notes
+
+FTP is unencrypted: use it only on a trusted local network. Editing PS5 databases is sensitive; keep backups and verify your target files. A compatible PS5 homebrew environment and elfldr are required for payload launching.
+
+<a id="credits"></a>
+## ❤️ Credits and disclaimer
+
+Developed by **MrGee with AI assistance**. Thanks to the contributors of zftpd, ftpsrv, ispc_texcomp, Pillow, TkinterDnD, Tk/Tcl, Python and Nuitka. Third-party software retains its own licenses. This is an independent homebrew project, not affiliated with or endorsed by Sony Interactive Entertainment.
+
+See also: [CHANGELOG.md](CHANGELOG.md) · [CREDITS.md](CREDITS.md) · [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) · [LICENSE](LICENSE)
